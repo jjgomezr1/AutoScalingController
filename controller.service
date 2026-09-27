@@ -1,0 +1,29 @@
+[Unit]
+Description=Auto-Scaling Controller (SI3016)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+ExecStart=/home/ubuntu/controller
+
+# Reinicio automatico ante fallas (requisito del diseno): si el proceso muere
+# por cualquier razon, systemd lo revive a los 5 segundos.
+Restart=always
+RestartSec=5
+
+# --- Parametros de infraestructura ---
+# Se definen aqui para que el despliegue quede autodocumentado y no dependa de
+# los valores por defecto del codigo. Ajusta si recreas la infraestructura.
+Environment=AMI_ID=<AQUI INSERTAR ID (AMI DORADA)>
+Environment=SUBNET_ID=<AQUI INSERTAR ID (SUBRED PUBLICA)>
+Environment=SECURITY_GROUP=<AQUI INSERTAR ID (SECURITY GROUP INSTANCIAS)>
+Environment=TARGET_GROUP_ARN=<AQUI INSERTAR ARN (TARGET GROUP)>
+Environment=ALB_NOMBRE=<AQUI INSERTAR NOMBRE (ALB)>
+Environment=TIPO_INSTANCIA=t3.micro
+Environment=KEY_PAIR=vockey
+
+[Install]
+WantedBy=multi-user.target

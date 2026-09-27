@@ -1,0 +1,27 @@
+# Binarios compilados (se generan con go build; no deben versionarse)
+/permcheck
+/permcheck.exe
+/scaletest
+/scaletest.exe
+/controller
+/controller.exe
+
+# Cualquier ejecutable de Windows
+*.exe
+
+# Archivos temporales de pruebas locales
+*.txt.tmp
+
+# Artefactos de cobertura de tests
+*.out
+coverage.*
+
+# Artefactos del experimento (modo de inyeccion)
+# El archivo de inyeccion y los logs del experimento son transitorios; el
+# escenario.sh y el paquete inject SI se versionan.
+inyeccion.txt
+*.log
+experimento*.txt
+
+# IDs reales de AWS del despliegue (no versionar)
+ids-aws.txt
